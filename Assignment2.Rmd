@@ -1,0 +1,50 @@
+---
+title: "Developing Data Products - Week 2 Assignment"
+author: "Lina"
+date: "08/04/2021"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Data
+The data for this map is tourist attractions in London. The data is taken from [here](https://www.latlong.net/place/the-london-eye-uk-2843.html)
+
+```{r, echo=TRUE, results=FALSE, warning=FALSE}
+objects <- read.csv(textConnection("
+Object,latitude,longitude
+Clarence House, 51.504002, -0.138500
+Prime Meridian (Greenwich) , 51.477928, -0.001545
+Sky Garden, 51.511177, -0.083094
+County Hall, 51.501945, -0.118889
+Lloyds Building, 51.513058, -0.082361
+The Shard, 51.504501, -0.086500
+The Royal Albert Hall, 51.500942, -0.177498
+St Paul's Cathedral, 51.513611,	-0.098056
+Westminster Cathedral, 51.496284,	-0.139888
+Abbey Road, 51.532005,	-0.177331
+Oxford Street, 51.515419,	-0.141099
+Big Ben, 51.510357,	-0.116773
+The Tower of London, 51.508530,	-0.076132
+St. James’s Park, 51.502464,	-0.137000
+Greenwich Park, 51.476688,	0.000130
+Hyde Park, 51.508610,	-0.163611
+British Museum, 51.518757, -0.126168
+Victoria and Albert Museum, 51.496639,	-0.172180
+Tower Bridge, 51.505554,	-0.075278
+Buckingham Palace, 51.501476,	-0.140634
+Royal Botanic Gardens (Kew),	51.478298,	-0.297954
+"))
+```
+ 
+## Plotting Map
+
+The map below shows some of the most popular tourist attractions in London.
+
+```{r Leaflet, echo=TRUE, warning=FALSE, message=FALSE}
+library(leaflet)
+objects %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(clusterOptions = markerClusterOptions())
+```
